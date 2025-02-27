@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ViewController;
+use App\Http\Controllers\ApotikController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,4 +27,7 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
+
+    Route::get('buat_apotik', [ViewController::class, 'buat_apotik'])->name('buat_apotik');
+    Route::post('create_apotik', [ApotikController::class, 'create_apotik'])->name('create_apotik');
 });
