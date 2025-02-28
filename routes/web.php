@@ -29,5 +29,7 @@ Route::middleware([
     })->name('dashboard');
 
     Route::get('buat_apotik', [ViewController::class, 'buat_apotik'])->name('buat_apotik');
+    Route::get('buat_vendor', [ViewController::class, 'buat_vendor'])->name('buat_vendor');
     Route::post('create_apotik', [ApotikController::class, 'create_apotik'])->name('create_apotik');
+    Route::post('create_vendor', [ApotikController::class, 'create_vendor'])->name('create_vendor');
 });
