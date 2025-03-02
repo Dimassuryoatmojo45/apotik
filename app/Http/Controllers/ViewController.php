@@ -14,4 +14,11 @@ class ViewController extends Controller
         $user = Auth::user();
         return view('buat_apotik');
     }
+
+    public function buat_vendor(){
+
+        $user = Auth::user();
+
+        return view('buat_vendor');
+    }
 }
