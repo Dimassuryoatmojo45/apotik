@@ -2,20 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
-use App\Models\Apotik;
+use App\Models\Vendor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
-class ApotikController extends Controller
+class VendorController extends Controller
 {
-    public function create_apotik()
+    public function create_vendor()
     {
 
         $validator = Validator::make(request()->all(), [
 
-            'nama_apotik' => 'required',
+            'nama_perusahaan' => 'required',
             'alamat' => 'required',
             'no_hp' => 'required'
         ]);
@@ -24,26 +23,22 @@ class ApotikController extends Controller
         if ($validator->fails()) {
             return response()->json($validator->messages());
         }
+        $apotik_id = Auth::user()->apotik_id;
 
-        $apotik = Apotik::create(
+        $vendor = Vendor::create(
             [
-                'nama_apotik' => strtoupper(request('nama_apotik')),
+                'nama_perusahaan' => request('nama_perusahaan'),
                 'alamat' => request('alamat'),
                 'no_hp' => request('no_hp'),
+                'apotik_id' => $apotik_id
             ]
         );
 
-        $update_data = User::find(Auth::user()->id);
-
-        $update_data->apotik_id = $apotik->id;
-
-        $update_data->save();
-
-
-        if ($apotik) {
+        if ($vendor) {
             // return response()->json(['message' => 'Pendaftaran Berhasil!']);
 
-            return return redirect()->back();
+            return redirect()->back();
+
         } else {
             return response()->json(['message' => 'Pendaftaran Gagal!']);
         }

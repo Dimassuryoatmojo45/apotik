@@ -237,7 +237,15 @@
                             <a href="#" class="dropdown-item">Feedback</a>
                             <div class="dropdown-divider"></div>
                             <a href="./settings.html" class="dropdown-item">Settings</a>
-                            <a href="./sign-in.html" class="dropdown-item">Logout</a>
+                            <form method="POST" action="{{ route('logout') }}" x-data>
+                                @csrf
+
+                                <!-- <x-dropdown-link href="{{ route('logout') }}" @click.prevent="$root.submit();">
+                                    {{ __('Log Out') }}
+                                </x-dropdown-link> -->
+                                <a href="{{ route('logout') }}" @click.prevent="$root.submit();"
+                                    class="dropdown-item">Logout</a>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -283,7 +291,7 @@
                                                 </svg>
                                             </span>
                                             <span class="nav-link-title">
-                                                Buat Apotik
+                                                Apotik
                                             </span>
                                         </a>
                                     </li>
@@ -305,7 +313,7 @@
                                                 </svg>
                                             </span>
                                             <span class="nav-link-title">
-                                                Buat Vendor
+                                                Vendor
                                             </span>
                                         </a>
                                     </li>
