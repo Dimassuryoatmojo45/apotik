@@ -45,8 +45,11 @@ class TransaksiVendorController extends Controller
         );
 
         if ($vendor) {
-            // return response()->json(['message' => 'Pendaftaran Berhasil!']);
-            return redirect()->back();
+            if (preg_match('/api/', $request->server('REQUEST_URI'))) {
+                return response()->json(['message' => 'Berhasil']);
+            } else {
+                return redirect()->back();
+            }
         } else {
             return response()->json(['message' => 'Pendaftaran Gagal!']);
         }

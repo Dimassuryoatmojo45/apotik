@@ -10,16 +10,14 @@ use Illuminate\Support\Facades\Validator;
 
 class ApotikController extends Controller
 {
-    public function create_apotik()
+    public function create_apotik(Request $request)
     {
-
         $validator = Validator::make(request()->all(), [
 
             'nama_apotik' => 'required',
             'alamat' => 'required',
             'no_hp' => 'required'
         ]);
-
 
         if ($validator->fails()) {
             return response()->json($validator->messages());
@@ -41,11 +39,15 @@ class ApotikController extends Controller
 
 
         if ($apotik) {
-            // return response()->json(['message' => 'Pendaftaran Berhasil!']);
+            if (preg_match('/api/', $request->server('REQUEST_URI'))) {
+                return response()->json(['message' => 'Berhasil']);
 
-            return return redirect()->back();
+            } else {
+                return redirect()->back();
+                
+            }
         } else {
-            return response()->json(['message' => 'Pendaftaran Gagal!']);
+            return response()->json(['message' => 'Gagal!']);
         }
     }
 }
