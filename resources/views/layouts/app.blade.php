@@ -237,14 +237,12 @@
                             <a href="#" class="dropdown-item">Feedback</a>
                             <div class="dropdown-divider"></div>
                             <a href="./settings.html" class="dropdown-item">Settings</a>
-                            <form method="POST" action="{{ route('logout') }}" x-data>
+                            <form method="POST" action="{{ route('logout') }}">
                                 @csrf
-
-                                <!-- <x-dropdown-link href="{{ route('logout') }}" @click.prevent="$root.submit();">
-                                    {{ __('Log Out') }}
-                                </x-dropdown-link> -->
-                                <a href="{{ route('logout') }}" @click.prevent="$root.submit();"
-                                    class="dropdown-item">Logout</a>
+                                <a href="{{ route('logout') }}" class="dropdown-item"
+                                    onclick="event.preventDefault(); this.closest('form').submit();">
+                                    {{ __('Logout') }}
+                                </a>
                             </form>
                         </div>
                     </div>
