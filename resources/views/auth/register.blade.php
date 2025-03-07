@@ -78,14 +78,14 @@
                             <div class="error">{{ $message }}</div>
                             @enderror
                         </div>
-                        <div class="mb-3">
+                        <!-- <div class="mb-3">
                             <label for="password_confirmation">Confirm Password</label>
                             <input type="password" class="form-control" name="password_confirmation"
                                 placeholder="Konfirmasi Password" required>
                             @error('password_confirmation')
                             <div class="error">{{ $message }}</div>
                             @enderror
-                        </div>
+                        </div> -->
                         <!-- <div class="mb-3">
                             <label class="form-check">
                                 <input type="checkbox" class="form-check-input" />

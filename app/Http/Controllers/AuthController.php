@@ -8,6 +8,8 @@ use App\Models\User;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 use App\Actions\Fortify\PasswordValidationRules;
+use Laravel\Sanctum\PersonalAccessToken;
+use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
@@ -57,7 +59,7 @@ class AuthController extends Controller
         $a = Validator::make($input, [
             'username' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => $this->passwordRules(),
+            'password' => ['required', 'string', 'min:8']
             // 'terms' => Jetstream::hasTermsAndPrivacyPolicyFeature() ? ['accepted', 'required'] : '',
         ])->validate();
 
@@ -72,9 +74,29 @@ class AuthController extends Controller
         $token = $user->createToken('YourAppName')->plainTextToken;
 
         return response()->json([
-            'token' => $token,
+            "token"=> "Bearer <access-token>",
             'user' => $user,
         ]);
 
+    }
+
+    /**
+     * Destroy an authenticated session and revoke the user's API token.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(Request $request)
+    {
+        try {
+            $request->user()->currentAccessToken()->delete();
+            $request->user()->tokens()->delete();
+            
+            return response()->json(['status' => 'true', 'message' => 'Berhasil Logout', 'data' => []]);
+        
+        } catch (\Exception $e) {
+            return response()->json(['status' => 'false', 'message' => $e->getMessage(),'data' => []], 500);
+        
+        }
     }
 }
