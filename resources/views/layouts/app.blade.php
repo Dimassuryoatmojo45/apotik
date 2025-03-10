@@ -27,7 +27,7 @@
     </style>
 </head>
 
-<body class=" layout-boxed">
+<body class=" layout-fluid">
     <script src="./js/demo-theme.min.js"></script>
     <div class="page">
         <!-- Navbar -->
