@@ -120,7 +120,7 @@
                                             <th>Nama Apotik</th>
                                             <th>Nomor</th>
                                             <th>Alamat</th>
-                                            <th class="w-1"></th>
+                                            <!-- <th class="w-1"></th> -->
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -147,7 +147,7 @@
                                             <td class="text-secondary" data-label="Role">
                                                 {{ $dd->alamat }}
                                             </td>
-                                            <td>
+                                            <!-- <td>
                                                 <div class="btn-list flex-nowrap">
                                                     <a href="#" class="btn btn-1">
                                                         Edit
@@ -167,7 +167,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </td>
+                                            </td> -->
                                         </tr>
                                         @endforeach
                                     </tbody>
