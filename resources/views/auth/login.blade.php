@@ -63,12 +63,13 @@
                                 </span>
                             </label>
                             <div class="input-group input-group-flat">
-                                <input type="password" class="form-control" name="password" placeholder="Password"
-                                    autocomplete="off">
+                                <input id="password" type="password" class="form-control" name="password"
+                                    placeholder="Password" autocomplete="off">
                                 <span class="input-group-text">
-                                    <a href="#" class="link-secondary" title="Show password" data-bs-toggle="tooltip">
+                                    <a id="toggle-password" class="link-secondary" title="Show password"
+                                        data-bs-toggle="tooltip">
                                         <!-- Download SVG icon from http://tabler.io/icons/icon/eye -->
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                        <svg id="eye-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                                             stroke-linecap="round" stroke-linejoin="round" class="icon icon-1">
                                             <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
@@ -129,6 +130,25 @@
     <!-- Tabler Core -->
     <script src="./js/tabler.min.js" defer></script>
     <script src="./js/demo.min.js" defer></script>
+    <script>
+    document.getElementById('toggle-password').addEventListener('click', function() {
+        var passwordField = document.getElementById('password');
+        var eyeIcon = document.getElementById('eye-icon');
+
+        // Toggle password visibility
+        if (passwordField.type === "password") {
+            passwordField.type = "text"; // Show password
+            eyeIcon.setAttribute("d",
+                "M12 6c4.418 0 8 4.482 8 6s-3.582 6-8 6-8-4.482-8-6 3.582-6 8-6zM12 8a2 2 0 100 4 2 2 0 000-4z"
+            ); // Change icon to open eye
+        } else {
+            passwordField.type = "password"; // Hide password
+            eyeIcon.setAttribute("d",
+                "M12 6c4.418 0 8 4.482 8 6s-3.582 6-8 6-8-4.482-8-6 3.582-6 8-6zM12 8a2 2 0 100 4 2 2 0 000-4z"
+            ); // Change icon back to closed eye
+        }
+    });
+    </script>
 </body>
 
 </html>

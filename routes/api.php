@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ApotikController;
 use App\Http\Controllers\VendorController;
+use App\Http\Controllers\ViewController;
 use App\Http\Controllers\TransaksiVendorController;
 
 /*
@@ -26,6 +27,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::middleware('auth:sanctum')->group(function () {
+    Route::get('buat_apotik', [ViewController::class, 'buat_apotik']);
+    
     Route::post('/create_apotik', [ApotikController::class, 'create_apotik']);
     Route::post('/create_vendor', [VendorController::class, 'create_vendor']);
     Route::post('/create_stock', [TransaksiVendorController::class, 'create_stock']);
