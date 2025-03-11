@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Validator;
 
 class VendorController extends Controller
 {
-    public function create_vendor()
+    public function create_vendor(Request $request)
     {
 
         $validator = Validator::make(request()->all(), [
