@@ -28,6 +28,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('buat_apotik', [ViewController::class, 'buat_apotik']);
+    Route::get('buat_vendor', [ViewController::class, 'buat_vendor']);
     
     Route::post('/create_apotik', [ApotikController::class, 'create_apotik']);
     Route::post('/create_vendor', [VendorController::class, 'create_vendor']);
