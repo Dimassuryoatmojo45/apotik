@@ -122,7 +122,7 @@
                 </div> -->
             </div>
             <div class="text-center text-secondary mt-3">
-                Belum Punya Akun? <a href="./sign-up.html" tabindex="-1">Daftar</a>
+                Belum Punya Akun? <a href="./register" tabindex="-1">Daftar</a>
             </div>
         </div>
     </div>

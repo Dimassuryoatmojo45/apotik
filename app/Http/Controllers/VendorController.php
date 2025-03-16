@@ -37,9 +37,8 @@ class VendorController extends Controller
         if ($vendor) {
             if (preg_match('/api/', $request->server('REQUEST_URI'))) {
                 return response()->json(['message' => 'Berhasil']);
-
             } else {
-                return redirect()->back();
+                return redirect()->back()->with('success', 'Form berhasil disubmit!');
             }
 
         } else {

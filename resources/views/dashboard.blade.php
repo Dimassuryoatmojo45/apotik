@@ -1,6 +1,22 @@
 @extends('layouts.app')
 
 @section('content')
+<button id="cek_password" class="btn btn-2" data-bs-toggle="toast" data-bs-target="#toast-simple" hidden>
+    Simple toast
+</button>
+<div class="toast-container position-fixed top-0 end-0 p-3">
+    <div class="toast " id="toast-simple" role="alert" aria-live="assertive" aria-atomic="true" data-bs-autohide="true">
+        <div class="toast-header">
+            <span class="avatar avatar-xs me-2" style="background-image: url(./static/avatars/002m.jpg)"></span>
+            <strong class="me-auto">Hasta Dewa</strong>
+            <!-- <small>11 mins ago</small> -->
+            <button type="button" class="ms-2 btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body">
+            Selamat Datang
+        </div>
+    </div>
+</div>
 <!-- Page header -->
 <div class="page-header d-print-none">
     <div class="container-xl">
@@ -2669,4 +2685,10 @@
         </div>
     </div>
 </div>
+
+<script>
+$(document).ready(function() {
+    $("#cek_password").click();
+});
+</script>
 @endsection
