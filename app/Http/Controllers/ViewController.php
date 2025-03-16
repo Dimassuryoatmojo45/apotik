@@ -113,7 +113,8 @@ class ViewController extends Controller
                 'tv.nama_obat',
                 'v.nama_perusahaan',
                 'jo.deskripsi',
-                'tv.status_pembelian_id'
+                'tv.status_pembelian_id',
+                'tv.batch'
                 )
             ->get();
 

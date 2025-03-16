@@ -142,7 +142,7 @@
                                         </div>
                                         <div class="mb-3">
                                             <label class="form-label">Vendor</label>
-                                            <select class="form-select" name="vendor_id">
+                                            <select class="form-select" name="jenis_obat_id">
                                                 @foreach($dataJenisObat as $dJo)
                                                 <option value="{{ $dJo->id }}">{{ $dJo->deskripsi }}</option>
                                                 @endforeach
@@ -181,6 +181,7 @@
                                         <th>Nama Vendor</th>
                                         <th>Jenis Obat</th>
                                         <th>Pembelian</th>
+                                        <th>Batch</th>
                                         <!-- <th class="w-1"></th> -->
                                     </tr>
                                 </thead>
@@ -199,6 +200,9 @@
                                         </td>
                                         <td class="text-secondary" data-label="Role">
                                             {{ $dc->status_pembelian_id }}
+                                        </td>
+                                        <td class="text-secondary" data-label="Role">
+                                            {{ $dc->batch }}
                                         </td>
                                         <!-- <td>
                                                 <div class="btn-list flex-nowrap">
