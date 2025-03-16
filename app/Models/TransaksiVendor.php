@@ -13,10 +13,15 @@ class TransaksiVendor extends Model
         'nama_obat',
         'vendor_id',
         'status_pembelian_id',
-        'total_pembelian',
-        'jumlah_isi_perbox',
-        'satuan',
-        'batch',
+        'isi_box',
+        'isi_perbox',
+        'isi_satuan',
+        'total_obat',
+        'harga_perbox', 
+        'harga_per_stripe',
+        'harga_per_satuan',
+        'harga_total_pembelian',
+        'batch'
     ];
 
     protected $table = 'transaksi_vendor';

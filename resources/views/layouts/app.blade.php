@@ -22,6 +22,7 @@
     <link href="./css/tabler-vendors.min.css" rel="stylesheet" />
     <link href="./css/tabler-marketing.min.css" rel="stylesheet" />
     <link href="./css/demo.min.css" rel="stylesheet" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <style>
     @import url('https://rsms.me/inter/inter.css');
     </style>
@@ -265,7 +266,7 @@
                                 </span>
                             </a>
                             <div
-                                class="dropdown-menu {{ Request::is('buat_apotik') || Request::is('buat_vendor') ? 'show' : '' }}">
+                                class="dropdown-menu {{ Request::is('buat_apotik') || Request::is('buat_vendor') || Request::is('buat_transaksi') ? 'show' : '' }}">
                                 <div class="dropdown-menu-columns">
                                     <div class="dropdown-menu-column">
                                         <a class="dropdown-item {{ Request::is('buat_apotik') ? 'active' : '' }}"
@@ -279,6 +280,45 @@
                                         <a class="dropdown-item {{ Request::is('buat_vendor') ? 'active' : '' }}"
                                             href="./buat_vendor">
                                             Vendor
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="dropdown-menu-columns">
+                                    <div class="dropdown-menu-column">
+                                        <a class="dropdown-item {{ Request::is('buat_transaksi') ? 'active' : '' }}"
+                                            href="./buat_transaksi">
+                                            Transaksi Vendor
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="nav-item {{ Request::is('register_admin') ? 'active dropdown' : '' }}">
+                            <a class="nav-link dropdown-toggle" href="#navbar-layout" data-bs-toggle="dropdown"
+                                data-bs-auto-close="false" role="button" aria-expanded="true">
+                                <span class="nav-link-icon d-md-none d-lg-inline-block">
+                                    <!-- Download SVG icon from http://tabler.io/icons/icon/layout-2 -->
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        class="icon icon-tabler icons-tabler-outline icon-tabler-category">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                        <path d="M4 4h6v6h-6z" />
+                                        <path d="M14 4h6v6h-6z" />
+                                        <path d="M4 14h6v6h-6z" />
+                                        <path d="M17 17m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" />
+                                    </svg>
+                                </span>
+                                <span class="nav-link-title">
+                                    Menu
+                                </span>
+                            </a>
+                            <div class="dropdown-menu {{ Request::is('register_admin') ? 'show' : '' }}">
+                                <div class="dropdown-menu-columns">
+                                    <div class="dropdown-menu-column">
+                                        <a class="dropdown-item {{ Request::is('register_admin') ? 'active' : '' }}"
+                                            href="./register_admin">
+                                            Register Admin
                                         </a>
                                     </div>
                                 </div>

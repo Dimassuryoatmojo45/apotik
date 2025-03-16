@@ -10,12 +10,9 @@ class DetailTransaksiModel extends Model
     use HasFactory;
 
     protected $fillable = [
-        'nama_obat',
-        'total_pembelian',
-        'jumlah_isi_perbox',
-        'satuan',
-        'batch',
+        'id_transaksi',
+        'nominal'
     ];
 
-    protected $table = 'transaksi_vendor';
+    protected $table = 'detail_transaksi';
 }

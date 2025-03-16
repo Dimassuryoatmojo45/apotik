@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Hash;
 use App\Actions\Fortify\PasswordValidationRules;
 use Laravel\Sanctum\PersonalAccessToken;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class AuthController extends Controller
 {
@@ -57,6 +58,7 @@ class AuthController extends Controller
         $input = $request->all();
 
         $a = Validator::make($input, [
+            'nama_lengkap' => ['required', 'string', 'max:255'],
             'username' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8']
@@ -65,6 +67,7 @@ class AuthController extends Controller
 
         // Create a new user
         $user = User::create([
+            'nama_lengkap' => $input['nama_lengkap'],
             'username' => $input['username'],
             'email' => $input['email'],
             'password' => Hash::make($input['password']),
@@ -98,5 +101,47 @@ class AuthController extends Controller
             return response()->json(['status' => 'false', 'message' => $e->getMessage(),'data' => []], 500);
         
         }
+    }
+
+    public function register_admin(Request $request)
+    {
+        $input = $request->all();
+
+        $apotik_id = DB::table('users')
+            ->where('id', $input['id_owner'])
+            ->first('apotik_id');
+
+        $a = Validator::make($input, [
+            'nama_lengkap' => ['required', 'string', 'max:255'],
+            'username' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'min:8']
+            // 'terms' => Jetstream::hasTermsAndPrivacyPolicyFeature() ? ['accepted', 'required'] : '',
+        ])->validate();
+
+        // Create a new user
+        $user = User::create([
+            'nama_lengkap' => $input['nama_lengkap'],
+            'username' => $input['username'],
+            'email' => $input['email'],
+            'password' => Hash::make($input['password']),
+            'apotik_id' => $apotik_id,
+            'role' => 2
+        ]);
+
+        // Generate API token for the user
+        $token = $user->createToken('YourAppName')->plainTextToken;
+
+        if (preg_match('/api/', $request->server('REQUEST_URI'))) {
+            return response()->json([
+                "token"=> "Bearer <access-token>",
+                'user' => $user,
+            ]);
+
+        } else {
+            
+            return $user;
+        }
+
     }
 }

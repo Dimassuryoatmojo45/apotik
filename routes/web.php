@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ViewController;
 use App\Http\Controllers\ApotikController;
 use App\Http\Controllers\VendorController;
@@ -32,7 +33,11 @@ Route::middleware([
 
     Route::get('buat_apotik', [ViewController::class, 'buat_apotik'])->name('buat_apotik');
     Route::get('buat_vendor', [ViewController::class, 'buat_vendor'])->name('buat_vendor');
+    Route::get('buat_transaksi', [ViewController::class, 'buat_transaksi'])->name('buat_transaksi');
+    Route::get('register_admin', [ViewController::class, 'register_admin'])->name('register_admin');
+
     Route::post('create_apotik', [ApotikController::class, 'create_apotik'])->name('create_apotik');
     Route::post('create_vendor', [VendorController::class, 'create_vendor'])->name('create_vendor');
     Route::post('create_stock', [TransaksiVendorController::class, 'create_stock'])->name('create_stock');
+    Route::post('register_admin', [AuthController::class, 'register_admin'])->name('register_admin');
 });

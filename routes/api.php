@@ -34,4 +34,5 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/create_vendor', [VendorController::class, 'create_vendor']);
     Route::post('/create_stock', [TransaksiVendorController::class, 'create_stock']);
     Route::post('/logout', [AuthController::class, 'destroy']);
+    Route::post('/register_admin', [AuthController::class, 'register_admin'])->name('register_admin');
 });
