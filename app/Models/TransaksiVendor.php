@@ -17,6 +17,7 @@ class TransaksiVendor extends Model
         'isi_perbox',
         'isi_satuan',
         'total_obat',
+        'jenis_obat_id',
         'harga_perbox', 
         'harga_per_stripe',
         'harga_per_satuan',

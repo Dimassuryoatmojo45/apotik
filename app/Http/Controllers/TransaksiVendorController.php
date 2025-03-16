@@ -33,20 +33,27 @@ class TransaksiVendorController extends Controller
             ->where('vendor_id', request('vendor_id'))
             ->count();
 
+        if ($batch == 0) {
+            $jumlah_batch = 1;
+        } else {
+            $jumlah_batch = $batch + 1;
+        }
+
         $vendor = TransaksiVendor::create(
             [
-                'nama_obat' => request('nama_obat'),
+                'nama_obat' => strtoupper(request('nama_obat')),
                 'vendor_id' =>  request('vendor_id'),
                 'status_pembelian_id' => request('status_pembelian'),
                 'isi_box' => request('isi_box'),
                 'isi_perbox' =>  request('isi_perbox'),
                 'isi_satuan' =>  request('isi_satuan'),
                 'total_obat' =>  request('total_obat'),
+                'jenis_obat_id' =>  request('jenis_obat_id'),
                 'harga_perbox' =>  request('harga_perbox'), 
                 'harga_per_stripe' =>  request('harga_perstripe'),
                 'harga_per_satuan' =>  request('harga_persatuan'),
                 'harga_total_pembelian' =>  request('harga_total_pembelian'),
-                'batch' => $batch + 1
+                'batch' => $jumlah_batch
             ]
 
         );
