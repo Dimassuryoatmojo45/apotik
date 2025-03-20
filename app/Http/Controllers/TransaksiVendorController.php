@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\TransaksiVendor;
-use App\Models\DetailTransaksiModel;
+use App\Models\DetailTransaksiVendor;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
@@ -58,7 +58,7 @@ class TransaksiVendorController extends Controller
 
         );
 
-        $detail_transaki = DetailTransaksiModel::create(
+        $detail_transaki = DetailTransaksiVendor::create(
             [
                 'id_transaksi' => $vendor->id,
                 'nominal' => request('harga_total_pembelian')
