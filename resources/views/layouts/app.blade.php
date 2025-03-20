@@ -266,7 +266,7 @@
                                 </span>
                             </a>
                             <div
-                                class="dropdown-menu {{ Request::is('buat_apotik') || Request::is('buat_vendor') || Request::is('buat_transaksi') ? 'show' : '' }}">
+                                class="dropdown-menu {{ Request::is('buat_apotik') || Request::is('buat_vendor') || Request::is('buat_transaksi') || Request::is('buat_transaksi_obat') ? 'show' : '' }}">
                                 <div class="dropdown-menu-columns">
                                     <div class="dropdown-menu-column">
                                         <a class="dropdown-item {{ Request::is('buat_apotik') ? 'active' : '' }}"
@@ -288,6 +288,14 @@
                                         <a class="dropdown-item {{ Request::is('buat_transaksi') ? 'active' : '' }}"
                                             href="./buat_transaksi">
                                             Transaksi Vendor
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="dropdown-menu-columns">
+                                    <div class="dropdown-menu-column">
+                                        <a class="dropdown-item {{ Request::is('buat_transaksi_obat') ? 'active' : '' }}"
+                                            href="./buat_transaksi_obat">
+                                            Transaksi Obat
                                         </a>
                                     </div>
                                 </div>

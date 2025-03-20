@@ -161,4 +161,58 @@ class ViewController extends Controller
 
         return view('auth.register_admin', $data);
     }
+
+    public function buat_transaksi_obat(Request $request){
+        $user = Auth::user()->apotik_id;
+        $dataTransaksiVendor = DB::table('transaksi_vendor as tv')
+            ->join('vendor as v','tv.vendor_id','v.id')
+            ->join('jenis_obat as jo','tv.jenis_obat_id','jo.id')
+            ->leftJoin('obat as o','tv.id','o.stock_id')
+            ->select(
+                'tv.id',
+                'tv.nama_obat',
+                'v.nama_perusahaan',
+                'jo.deskripsi',
+                'tv.status_pembelian_id',
+                'tv.batch',
+                DB::raw('COUNT(o.id) as jumlah_id')
+                )
+            ->groupBy('tv.id')
+            ->having('jumlah_id', 0)
+            ->get();
+
+        $dataObat = DB::table('obat as o')
+            ->join('transaksi_vendor as tv','o.stock_id','tv.id')
+            ->select(
+                'o.id',
+                'tv.nama_obat',
+                'o.harga_jual_per_box',
+                'o.harga_jual_per_stipe',
+                'o.harga_jual_per_satuan'
+                )
+            ->get();
+
+        $data = [
+            'dataTransaksiVendor' => $dataTransaksiVendor,
+            'dataObat' => $dataObat
+        ];
+
+        return view('buat_transaksi_obat', $data); 
+    }
+
+    public function form_obat(Request $request)
+    {
+        $obat_id = $request->obat_id;
+        $apotik_id = Auth::user()->apotik_id;
+        $nama_admin = Auth::user()->nama_lengkap;
+
+        $data = [
+            'obat_id' => $obat_id,
+            'apotik_id' => $apotik_id,
+            'nama_admin' => $nama_admin
+        ];
+
+        return view('form_transaksi_obat', $data); 
+
+    }
 }
