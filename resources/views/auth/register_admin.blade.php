@@ -151,7 +151,6 @@
                                         <input type="number" name="id_owner" class="form-control" value="{{ $user }}"
                                             hidden>
                                         <div class="form-footer">
-                                            <button type="submit" class="btn btn-primary w-100">Buat Akun Admin</button>
                                             <button id="button_form_1" type="submit" class="btn btn-primary w-100"
                                                 hidden>Buat Akun
                                                 Baru</button>
@@ -183,10 +182,6 @@
                                 <thead>
                                     <tr>
                                         <th>Nama Lengkap</th>
-                                        <!-- <th>Nama Apotik</th> -->
-                                        <th>Nomor</th>
-                                        <th>Alamat</th>
-                                        <!-- <th class="w-1"></th> -->
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -198,42 +193,9 @@
                                                     style="background-image: url(./static/avatars/010m.jpg)"></span>
                                                 <div class="flex-fill">
                                                     <div class="font-weight-medium">{{ $dd->nama_lengkap }}</div>
-                                                    <!-- <div class="text-secondary"><a href="#"
-                                                                class="text-reset">{{ $dd->nama_lengkap }}</a></div> -->
                                                 </div>
                                             </div>
                                         </td>
-                                        <!-- <td data-label="Title">
-                                            <div>{{ $dd->nama_apotik }}</div>
-                                            <div class="text-secondary">Business Development</div>
-                                        </td> -->
-                                        <td class="text-secondary" data-label="Role">
-                                            {{ $dd->no_hp }}
-                                        </td>
-                                        <td class="text-secondary" data-label="Role">
-                                            {{ $dd->alamat }}
-                                        </td>
-                                        <!-- <td>
-                                                <div class="btn-list flex-nowrap">
-                                                    <a href="#" class="btn btn-1">
-                                                        Edit
-                                                    </a>
-                                                    <div class="dropdown">
-                                                        <button class="btn dropdown-toggle align-text-top"
-                                                            data-bs-toggle="dropdown">
-                                                            Actions
-                                                        </button>
-                                                        <div class="dropdown-menu dropdown-menu-end">
-                                                            <a class="dropdown-item" href="#">
-                                                                Action
-                                                            </a>
-                                                            <a class="dropdown-item" href="#">
-                                                                Another action
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </td> -->
                                     </tr>
                                     @endforeach
                                 </tbody>

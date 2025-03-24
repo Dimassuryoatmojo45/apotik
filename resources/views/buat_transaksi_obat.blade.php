@@ -42,7 +42,7 @@
                     </a>
                 </div>
             </div>
-
+            @if(Auth::user()->role_id == 1)
             <div class="col-auto ms-auto d-print-none">
                 <div class="btn-list">
                     <a href="#" class="btn btn-primary btn-5 d-none d-sm-inline-block" data-bs-toggle="modal"
@@ -116,6 +116,7 @@
                     </div>
                 </div>
             </div>
+            @endif
         </div>
     </div>
 </div>
@@ -150,7 +151,7 @@
                                             {{ $do->harga_jual_per_box }}
                                         </td>
                                         <td class="text-secondary" data-label="Role">
-                                            {{ $do->harga_jual_per_stipe }}
+                                            {{ $do->harga_jual_per_strip }}
                                         </td>
                                         <td class="text-secondary" data-label="Role">
                                             {{ $do->harga_jual_per_satuan }}
