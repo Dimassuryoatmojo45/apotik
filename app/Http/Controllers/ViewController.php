@@ -146,6 +146,7 @@ class ViewController extends Controller
     }
 
     public function register_admin(Request $request){
+        
         $user = Auth::user()->id;
         $apotik = Auth::user()->apotik_id;
 
@@ -154,16 +155,35 @@ class ViewController extends Controller
         ->where('role_id', 2)
         ->get();
 
-        $data = [
-            'user' => $user,
-            'data_admin' => $data_admin
-        ];
+        if (preg_match('/api/', $request->server('REQUEST_URI'))) {
 
-        return view('auth.register_admin', $data);
+            $response = [
+                'responseCode' => 200,
+                'status' => true,
+                'message' => 'Data found',
+                'data' => [
+                    'user' => $user,
+                    'data_admin' => $data_admin
+                ]
+            ];
+
+            return response()->json($response);
+
+        } else {
+
+            $data = [
+                'user' => $user,
+                'data_admin' => $data_admin
+            ];
+    
+            return view('auth.register_admin', $data); 
+        }
     }
 
     public function buat_transaksi_obat(Request $request){
+
         $user = Auth::user()->apotik_id;
+        
         $dataTransaksiVendor = DB::table('transaksi_vendor as tv')
             ->join('vendor as v','tv.vendor_id','v.id')
             ->join('jenis_obat as jo','tv.jenis_obat_id','jo.id')
@@ -192,12 +212,29 @@ class ViewController extends Controller
                 )
             ->get();
 
-        $data = [
-            'dataTransaksiVendor' => $dataTransaksiVendor,
-            'dataObat' => $dataObat
-        ];
+        if (preg_match('/api/', $request->server('REQUEST_URI'))) {
 
-        return view('buat_transaksi_obat', $data); 
+            $response = [
+                'responseCode' => 200,
+                'status' => true,
+                'message' => 'Data found',
+                'data' => [
+                    'dataTransaksiVendor' => $dataTransaksiVendor,
+                    'dataObat' => $dataObat
+                ]
+            ];
+
+            return response()->json($response);
+
+        } else {
+
+            $data = [
+                'dataTransaksiVendor' => $dataTransaksiVendor,
+                'dataObat' => $dataObat
+            ];
+    
+            return view('buat_transaksi_obat', $data); 
+        }
     }
 
     public function form_obat(Request $request)
@@ -206,13 +243,31 @@ class ViewController extends Controller
         $apotik_id = Auth::user()->apotik_id;
         $nama_admin = Auth::user()->nama_lengkap;
 
-        $data = [
-            'obat_id' => $obat_id,
-            'apotik_id' => $apotik_id,
-            'nama_admin' => $nama_admin
-        ];
+        if (preg_match('/api/', $request->server('REQUEST_URI'))) {
 
-        return view('form_transaksi_obat', $data); 
+            $response = [
+                'responseCode' => 200,
+                'status' => true,
+                'message' => 'Data found',
+                'data' => [
+                    'obat_id' => $obat_id,
+                    'apotik_id' => $apotik_id,
+                    'nama_admin' => $nama_admin
+                ]
+            ];
+
+            return response()->json($response);
+
+        } else {
+
+            $data = [
+                'obat_id' => $obat_id,
+                'apotik_id' => $apotik_id,
+                'nama_admin' => $nama_admin
+            ];
+    
+            return view('form_transaksi_obat', $data); 
+        }
 
     }
 }

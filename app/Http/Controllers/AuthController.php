@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Apotik;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 use App\Actions\Fortify\PasswordValidationRules;
@@ -56,6 +57,27 @@ class AuthController extends Controller
     public function register(Request $request)
     {
         $input = $request->all();
+        
+        $validator = Validator::make($input, [
+
+            'nama_apotik' => 'required',
+            'alamat' => 'required',
+            'no_hp' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json($validator->messages());
+        }
+
+        $apotik = Apotik::create(
+            [
+                'nama_apotik' => strtoupper(request('nama_apotik')),
+                'alamat' => request('alamat'),
+                'no_hp' => request('no_hp'),
+            ]
+        );
+
+        $apotik_id = $apotik->id;
 
         $a = Validator::make($input, [
             'nama_lengkap' => ['required', 'string', 'max:255'],
@@ -71,6 +93,8 @@ class AuthController extends Controller
             'username' => $input['username'],
             'email' => $input['email'],
             'password' => Hash::make($input['password']),
+            'apotik_id' => $apotik_id,
+            'role_id' => 1
         ]);
 
         // Generate API token for the user
