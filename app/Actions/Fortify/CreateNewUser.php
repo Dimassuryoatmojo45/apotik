@@ -57,6 +57,7 @@ class CreateNewUser implements CreatesNewUsers
             'email' => $input['email'],
             'password' => Hash::make($input['password']),
             'apotik_id' => $apotik_id,
+            'role_id' => 1
         ]);
     
         // Pengalihan setelah berhasil membuat pengguna baru
