@@ -26,7 +26,7 @@ class TransaksiObatController extends Controller
             [
                 'stock_id' => request('stock_id'),
                 'harga_jual_per_box' => request('harga_perbox'),
-                'harga_jual_per_stipe' => request('harga_perstip'),
+                'harga_jual_per_strip' => request('harga_perstip'),
                 'harga_jual_per_satuan' => request('harga_persatuan')
             ]
         );
@@ -42,27 +42,50 @@ class TransaksiObatController extends Controller
     {
         try {
             
+            $satuan = $request->satuan;
             $data_obat = DB::table('obat')
                 ->select(
                     'id',
+                    'harga_jual_per_box',
+                    'harga_jual_per_strip',
                     'harga_jual_per_satuan'
                     )
                 ->where('id', $request->obat_id)
                 ->first();
 
-            $id = DB::table('transaksi')->insertGetId([
-                'apotik_id' => $request->apotik_id,
-                'nama_admin' => $request->nama_admin,
-                'total' => $data_obat->harga_jual_per_satuan * $request->kuantiti
-            ]);
+            if ($satuan == 1) {
+                $id = DB::table('transaksi')->insertGetId([
+                    'apotik_id' => $request->apotik_id,
+                    'nama_admin' => $request->nama_admin,
+                    'total' => $data_obat->harga_jual_per_strip * $request->kuantiti
+                ]);
 
-            DB::table('detail_transaksi')
-            ->insert([
-                'id_transaksi' => $id,
-                'obat_id' => $request->obat_id,
-                'kuantiti' => $request->kuantiti,
-                'harga' => $data_obat->harga_jual_per_satuan
-            ]);
+                DB::table('detail_transaksi')
+                ->insert([
+                    'id_transaksi' => $id,
+                    'obat_id' => $request->obat_id,
+                    'kuantiti' => $request->kuantiti,
+                    'harga' => $data_obat->harga_jual_per_strip
+                ]);
+
+            } elseif ($satuan == 2) {
+
+                $id = DB::table('transaksi')->insertGetId([
+                    'apotik_id' => $request->apotik_id,
+                    'nama_admin' => $request->nama_admin,
+                    'total' => $data_obat->harga_jual_per_satuan * $request->kuantiti
+                ]);
+
+                DB::table('detail_transaksi')
+                ->insert([
+                    'id_transaksi' => $id,
+                    'obat_id' => $request->obat_id,
+                    'kuantiti' => $request->kuantiti,
+                    'harga' => $data_obat->harga_jual_per_satuan
+                ]);
+            }
+
+
 
             return redirect()->back()->with('success', 'Form berhasil disubmit!');
 

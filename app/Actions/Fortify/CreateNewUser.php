@@ -3,6 +3,8 @@
 namespace App\Actions\Fortify;
 
 use App\Models\User;
+use App\Models\Apotik;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Laravel\Fortify\Contracts\CreatesNewUsers;
@@ -19,7 +21,27 @@ class CreateNewUser implements CreatesNewUsers
      */
     public function create(array $input): User
     {
+        $validator = Validator::make(request()->all(), [
 
+            'nama_apotik' => 'required',
+            'alamat' => 'required',
+            'no_hp' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json($validator->messages());
+        }
+
+        $apotik = Apotik::create(
+            [
+                'nama_apotik' => strtoupper(request('nama_apotik')),
+                'alamat' => request('alamat'),
+                'no_hp' => request('no_hp'),
+            ]
+        );
+
+        $apotik_id = $apotik->id;
+        
         Validator::make($input, [
             'nama_lengkap' => ['required', 'string', 'max:255'],
             'username' => ['required', 'string', 'max:255'],
@@ -34,6 +56,7 @@ class CreateNewUser implements CreatesNewUsers
             'username' => $input['username'],
             'email' => $input['email'],
             'password' => Hash::make($input['password']),
+            'apotik_id' => $apotik_id,
         ]);
     
         // Pengalihan setelah berhasil membuat pengguna baru

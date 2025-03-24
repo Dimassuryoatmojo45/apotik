@@ -108,8 +108,11 @@ class AuthController extends Controller
         $input = $request->all();
 
         $apotik_id = DB::table('users')
+            ->select('apotik_id')
             ->where('id', $input['id_owner'])
-            ->first('apotik_id');
+            ->first();
+
+        $apotik = $apotik_id->apotik_id;
 
         $a = Validator::make($input, [
             'nama_lengkap' => ['required', 'string', 'max:255'],
@@ -125,8 +128,8 @@ class AuthController extends Controller
             'username' => $input['username'],
             'email' => $input['email'],
             'password' => Hash::make($input['password']),
-            'apotik_id' => $apotik_id,
-            'role' => 2
+            'apotik_id' => $apotik,
+            'role_id' => 2
         ]);
 
         // Generate API token for the user
@@ -137,10 +140,8 @@ class AuthController extends Controller
                 "token"=> "Bearer <access-token>",
                 'user' => $user,
             ]);
-
         } else {
-            
-            return $user;
+            return redirect()->back(); 
         }
 
     }

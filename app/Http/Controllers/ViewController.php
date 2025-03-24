@@ -187,7 +187,7 @@ class ViewController extends Controller
                 'o.id',
                 'tv.nama_obat',
                 'o.harga_jual_per_box',
-                'o.harga_jual_per_stipe',
+                'o.harga_jual_per_strip',
                 'o.harga_jual_per_satuan'
                 )
             ->get();

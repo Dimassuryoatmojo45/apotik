@@ -12,7 +12,7 @@ class TransaksiObat extends Model
     protected $fillable = [
         'stock_id',
         'harga_jual_per_box',
-        'harga_jual_per_stipe',
+        'harga_jual_per_strip',
         'harga_jual_per_satuan'
     ];
 

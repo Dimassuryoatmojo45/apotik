@@ -301,6 +301,7 @@
                                 </div>
                             </div>
                         </li>
+                        @if(Auth::user()->role_id == 1)
                         <li class="nav-item {{ Request::is('register_admin') ? 'active dropdown' : '' }}">
                             <a class="nav-link dropdown-toggle" href="#navbar-layout" data-bs-toggle="dropdown"
                                 data-bs-auto-close="false" role="button" aria-expanded="true">
@@ -332,6 +333,7 @@
                                 </div>
                             </div>
                         </li>
+                        @endif
                     </ul>
                 </div>
             </div>
