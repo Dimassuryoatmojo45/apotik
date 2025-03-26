@@ -20,6 +20,9 @@ use App\Http\Controllers\TransaksiObatController;
 */
 
 Route::get('/', function () {
+    return view('landing');
+});
+Route::get('/sign_in', function () {
     return view('auth.login');
 });
 
